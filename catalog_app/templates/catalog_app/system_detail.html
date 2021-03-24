@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %} {% block content %}
+<h1>Detail System Information</h1>
+{% if system %}
+<ul>
+  <li>
+    <a href="{{ system.get_absolute_url }}">{{ system.host }}</a>
+    ({{system.port}})
+  </li>
+</ul>
+{% else %}
+<p>There are no systems details in the database.</p>
+{% endif %} {% endblock %}

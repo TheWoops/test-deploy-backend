@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %} {% block content %}
+<h1>Backend Test</h1>
+<p>
+  Welcome to the backend test developed by
+  <em>The Woops</em>!
+</p>
+<h2>Dynamic content</h2>
+<p>The db has the following record counts:</p>
+<ul>
+  <li><strong>Customers:</strong> {{ num_customers }}</li>
+  <li><strong>Systems:</strong> {{ num_systems }}</li>
+</ul>
+{% endblock %}

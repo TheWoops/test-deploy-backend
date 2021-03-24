@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %} {% block content %}
+<h1>Detail Customer Information</h1>
+{% if customer %}
+<ul>
+  <li>
+    <a href="{{ customer.get_absolute_url }}">{{ customer.name }}</a>
+    ({{customer.location}})
+  </li>
+</ul>
+{% else %}
+<p>There are no customers details in the database.</p>
+{% endif %} {% endblock %}
