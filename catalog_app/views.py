@@ -11,9 +11,14 @@ def index(request):
     num_customers = Customer.objects.all().count()
     num_systems = System.objects.all().count()
 
+    # Number of visits to this view, as counted in the session variable.
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
+
     context = {
         'num_customers': num_customers,
         'num_systems': num_systems,
+        'num_visits' : num_visits
     }
 
     # Render the HTML template index.html with the data in the context variable
