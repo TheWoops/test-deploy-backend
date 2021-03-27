@@ -1,14 +1,17 @@
-{% extends "base_generic.html" %} {% block content %}
-<h1>Backend Deployment Test</h1>
-<p>
-  Welcome to the backend test developed by
-  <a href="https://github.com/TheWoops">The Woops</a>!
-</p>
-<h2>Dynamic content</h2>
-<p>The db has the following record counts:</p>
-<ul>
-  <li><strong>Customers:</strong> {{ num_customers }}</li>
-  <li><strong>Systems:</strong> {{ num_systems }}</li>
-  <li><strong>Number of user visits:</strong> {{ num_visits }}</li>
-</ul>
+{% extends "base_generic.html" %} 
+
+{% block content %}
+  <h1>Backend Deployment Test</h1>
+  <p>
+    Welcome to the backend test developed by
+    <a href="https://github.com/TheWoops">The Woops</a>!
+  </p>
+  <h2>Dynamic content</h2>
+  <p>The db has the following record counts:</p>
+  <ul>
+    <li><strong>Customers:</strong> {{ num_customers }}</li>
+    <li><strong>Systems:</strong> {{ num_systems }}</li>
+    <li><strong>Number of user visits:</strong> {{ num_visits }}</li>
+  </ul>
+  <p>Please Login to see more</p>
 {% endblock %}

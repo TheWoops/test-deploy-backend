@@ -42,7 +42,7 @@ class SystemListView(generic.ListView):
     model = System
     context_object_name = 'system_list'
     template_name = 'catalog_app/system_list'
-    queryset = System.objects.all()[:3]
+    paginate_by=10
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context
@@ -50,6 +50,8 @@ class SystemListView(generic.ListView):
         # Create any data and add it to the context
         context['test_column'] = 'Testing additional variable'
         return context
+
+    
    
 class SystemDetailView(generic.DetailView):
     model = System

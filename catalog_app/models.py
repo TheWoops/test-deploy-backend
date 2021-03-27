@@ -14,6 +14,7 @@ class Customer(models.Model):
 
     class Meta:
        ordering = ['name', 'location']
+       permissions = (("can_see_all_customers", "Can see all customers"),)
 
     def __str__(self):
         return f'{self.name}'
@@ -37,6 +38,7 @@ class System(models.Model):
 
     class Meta:
         ordering = ['customer', 'host']
+        permissions = (("can_see_all_systems", "Can see all systems"),)
 
     def __str__(self):
         return f'{self.customer.name} | {self.protocol}://{self.host}:{self.port}/{self.suffix}'

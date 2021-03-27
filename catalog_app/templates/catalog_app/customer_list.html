@@ -1,14 +1,20 @@
-{% extends "base_generic.html" %} {% block content %}
-<h1>Customer List</h1>
-{% if customer_list %}
-<ul>
-  {% for customer in customer_list %}
-  <li>
-    <a href="{{ customer.get_absolute_url }}">{{ customer.name }}</a>
-    ({{customer.location}})
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>There are no customers in the database.</p>
-{% endif %} {% endblock %}
+{% extends "base_generic.html" %} 
+{% block content %}
+    <h1>Customer List</h1>
+    {% if perms.catalog_app.can_see_all_customers %}
+            {% if customer_list %}
+                <ul>
+                {% for customer in customer_list %}
+                <li>
+                  <a href="{{ customer.get_absolute_url }}">{{ customer.name }}</a>
+                  ({{customer.location}})
+                </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>There are no customers in the database.</p>
+            {% endif %}
+      {% else %}
+          <p> <p>Please login with a user having special auth rights to see the system list</p></p>
+      {% endif %}
+ {% endblock %}

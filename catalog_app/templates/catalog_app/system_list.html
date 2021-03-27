@@ -1,14 +1,21 @@
-{% extends "base_generic.html" %} {% block content %}
-<h1>System List</h1>
-{% if system_list %}
-<ul>
-  {% for system in system_list %}
-  <li>
-    <a href="{{ system.get_absolute_url }}">{{ system.host }}</a>
-    ({{system.port}})
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>There are no systems in the database.</p>
-{% endif %} {% endblock %}
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>System List</h1>
+    {%if perms.catalog_app.can_see_all_systems %}
+        {% if system_list %}
+            <ul>
+            {% for system in system_list %}
+                <li>
+                <a href="{{ system.get_absolute_url }}">{{ system.host }}</a>
+                ({{system.port}})
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>There are no systems in the database.</p>
+        {% endif %}
+    {% else %}
+        <p>Please login with a user having special auth rights to see the system list</p>
+    {% endif %}
+{% endblock %}
