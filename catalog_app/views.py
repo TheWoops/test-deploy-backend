@@ -4,6 +4,13 @@ from django.views import generic
 # Create your views here.
 from catalog_app.models import Customer, System
 
+# Used for POST requests
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from catalog_app.forms import UpdateCustomerForm
+from django.contrib.auth.decorators import login_required, permission_required
+
 def index(request):
     """View function for home page of site."""
 
@@ -50,8 +57,38 @@ class SystemListView(generic.ListView):
         # Create any data and add it to the context
         context['test_column'] = 'Testing additional variable'
         return context
-
-    
-   
+  
 class SystemDetailView(generic.DetailView):
     model = System
+
+######## handling Post requests ########
+@login_required
+@permission_required('catalog_app.can_see_all_customers', raise_exception=True)
+def renew_customer(request, pk):
+    customer_instance = get_object_or_404(Customer, pk=pk)
+
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = UpdateCustomerForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            customer_instance.location = form.cleaned_data['new_location']
+            customer_instance.save()
+
+            # redirect to a new URL (HomePage):
+            return HttpResponseRedirect(reverse('customer-detail', args=[pk]) )
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = UpdateCustomerForm(initial={'new_location': customer_instance.location})
+
+    context = {
+        'form': form,
+        'customer_instance': customer_instance,
+    }
+
+    return render(request, 'catalog_app/update_customer.html', context)

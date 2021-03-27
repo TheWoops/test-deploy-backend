@@ -8,6 +8,7 @@
                 <li>
                   <a href="{{ customer.get_absolute_url }}">{{ customer.name }}</a>
                   ({{customer.location}})
+                  <a href="{% url 'renew-customer' customer.id %}">Update customer</a>
                 </li>
                 {% endfor %}
                 </ul>

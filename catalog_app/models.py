@@ -5,6 +5,7 @@ from django.urls import reverse
 class Customer(models.Model):
     """Class containing typical information about our customers"""
 
+    # better use uuid as id https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models
     name = models.CharField(max_length=100, help_text='e.g. Microsoft Deutschland GmbH')
     location = models.CharField(max_length=70, blank=True, default = '', help_text='e.g. Stuttgart')
     address = models.CharField(max_length=250, 
