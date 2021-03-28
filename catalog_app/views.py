@@ -11,6 +11,10 @@ from django.urls import reverse
 from catalog_app.forms import UpdateCustomerForm
 from django.contrib.auth.decorators import login_required, permission_required
 
+# CRUD Operations
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+
 def index(request):
     """View function for home page of site."""
 
@@ -61,7 +65,8 @@ class SystemListView(generic.ListView):
 class SystemDetailView(generic.DetailView):
     model = System
 
-######## handling Post requests ########
+############################### Handling Post requests ####################################
+
 @login_required
 @permission_required('catalog_app.can_see_all_customers', raise_exception=True)
 def renew_customer(request, pk):
@@ -92,3 +97,19 @@ def renew_customer(request, pk):
     }
 
     return render(request, 'catalog_app/update_customer.html', context)
+
+############################### CRUD Operations ####################################
+
+class SystemCreate(CreateView):
+    model = System
+    fields = ['customer', 'protocol', 'host', 'suffix', 'port', 'user', 'password', 'token']
+    initial = {'customer': 'Demo Customer'}
+
+class SystemUpdate(UpdateView):
+    model = System
+    fields = ['customer', 'protocol', 'host', 'suffix', 'port', 'user', 'password', 'token']
+
+class SystemDelete(DeleteView):
+    model = System
+    success_url = reverse_lazy('systems')
+

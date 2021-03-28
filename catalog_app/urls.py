@@ -12,4 +12,8 @@ urlpatterns = [
 # Alter data via form
 urlpatterns += [
     path('customer/<int:pk>/renew/', views.renew_customer, name='renew-customer'),
+    path('systems/create/', views.SystemCreate.as_view(), name='system-create'),
+    path('systems/<int:pk>/update/', views.SystemUpdate.as_view(), name='system-update'),
+    path('systems/<int:pk>/delete/', views.SystemDelete.as_view(), name='system-delete'),
+
 ]

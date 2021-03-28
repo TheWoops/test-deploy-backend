@@ -9,9 +9,11 @@
                 <li>
                 <a href="{{ system.get_absolute_url }}">{{ system.host }}</a>
                 ({{system.port}})
+                <a href="{% url 'system-delete' system.id %}">Delete System</a>
                 </li>
             {% endfor %}
             </ul>
+            <a href="{% url 'system-create' %}">Create new System</a>
         {% else %}
             <p>There are no systems in the database.</p>
         {% endif %}
