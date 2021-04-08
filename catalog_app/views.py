@@ -15,6 +15,9 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
+# Permisson checks for class based views
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+
 def index(request):
     """View function for home page of site."""
 
@@ -40,7 +43,7 @@ class CustomerListView(generic.ListView):
     model = Customer
     context_object_name = 'customer_list'
     template_name = 'catalog_app/customer_list'
-    paginate_by = 1
+    paginate_by = 10
 
     def get_queryset(self):
         return Customer.objects.all()

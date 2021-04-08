@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 class UpdateCustomerForm(forms.Form):
-    new_location = forms.CharField(help_text="Enter the new company location")
+    new_location = forms.CharField(help_text="Enter a new company location")
 
     def clean_new_location(self):
         data = self.cleaned_data['new_location']
