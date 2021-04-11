@@ -80,7 +80,6 @@ WSGI_APPLICATION = 'mytestsite.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # Development Environment Setting for Database
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -91,7 +90,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-"""
+
 # Production Environment Setting for Database
 # Heroku: Update database configuration from $DATABASE_URL.
 import dj_database_url
